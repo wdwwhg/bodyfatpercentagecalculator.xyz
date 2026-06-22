@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#e7f7f3"/>
+      <stop offset="1" stop-color="#f7fbfa"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <circle cx="1040" cy="80" r="260" fill="#087f73" opacity=".08"/>
+  <circle cx="120" cy="610" r="260" fill="#087f73" opacity=".08"/>
+  <rect x="88" y="86" width="94" height="94" rx="28" fill="#087f73"/>
+  <text x="135" y="145" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-weight="700" font-size="30">BF%</text>
+  <text x="88" y="275" fill="#102a2a" font-family="Arial, sans-serif" font-weight="800" font-size="72">Body Fat Percentage</text>
+  <text x="88" y="360" fill="#102a2a" font-family="Arial, sans-serif" font-weight="800" font-size="72">Calculator</text>
+  <text x="88" y="435" fill="#567070" font-family="Arial, sans-serif" font-size="34">Navy measurements or height &amp; weight estimate</text>
+  <rect x="88" y="494" width="430" height="66" rx="33" fill="#087f73"/>
+  <text x="303" y="537" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-weight="700" font-size="28">Free · Private · Instant</text>
+</svg>

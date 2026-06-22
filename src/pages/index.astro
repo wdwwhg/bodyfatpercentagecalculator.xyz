@@ -1,0 +1,896 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+---
+
+<BaseLayout>
+  <main id="main-content">
+    <section class="hero">
+      <div class="container">
+        <p class="eyebrow">Free · Private · Instant</p>
+        <h1>Body Fat Percentage Calculator</h1>
+        <p class="hero-copy">
+          Estimate your body fat percentage with the US Navy measurement method or a
+          quick height and weight formula. See your reference range, fat mass, and lean
+          mass without signing up.
+        </p>
+        <ul class="trust-list" aria-label="Calculator benefits">
+          <li><span class="trust-check" aria-hidden="true">✓</span> No account required</li>
+          <li><span class="trust-check" aria-hidden="true">✓</span> Metric and US units</li>
+          <li><span class="trust-check" aria-hidden="true">✓</span> Runs in your browser</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="container" aria-labelledby="calculator-heading">
+      <div class="calculator-shell">
+        <h2 id="calculator-heading" class="sr-only">Calculate your body fat percentage</h2>
+        <form id="body-fat-form" class="calculator-card" novalidate>
+          <div class="segmented-control" role="tablist" aria-label="Calculation method">
+            <button
+              class="segment"
+              id="navy-tab"
+              type="button"
+              role="tab"
+              aria-selected="true"
+              aria-controls="navy-fields"
+              data-method="navy">US Navy Method</button
+            >
+            <button
+              class="segment"
+              id="bmi-tab"
+              type="button"
+              role="tab"
+              aria-selected="false"
+              aria-controls="bmi-note"
+              data-method="bmi">Height &amp; Weight</button
+            >
+          </div>
+          <input id="method" name="method" type="hidden" value="navy" />
+          <p id="method-note" class="method-note">
+            Uses body circumferences for a more individual estimate.
+          </p>
+
+          <div class="field-grid two">
+            <fieldset class="field">
+              <legend class="field-legend">Formula sex</legend>
+              <div class="choice-row">
+                <div class="choice">
+                  <input id="sex-female" name="formulaSex" type="radio" value="female" checked />
+                  <label for="sex-female">Female</label>
+                </div>
+                <div class="choice">
+                  <input id="sex-male" name="formulaSex" type="radio" value="male" />
+                  <label for="sex-male">Male</label>
+                </div>
+              </div>
+              <p class="field-hint">Choose the formula that matches your body measurements.</p>
+            </fieldset>
+
+            <fieldset class="field">
+              <legend class="field-legend">Units</legend>
+              <div class="choice-row">
+                <div class="choice">
+                  <input id="units-metric" name="units" type="radio" value="metric" checked />
+                  <label for="units-metric">Metric</label>
+                </div>
+                <div class="choice">
+                  <input id="units-imperial" name="units" type="radio" value="imperial" />
+                  <label for="units-imperial">US units</label>
+                </div>
+              </div>
+              <p class="field-hint">Values convert automatically when you switch.</p>
+            </fieldset>
+          </div>
+
+          <div class="form-section">
+            <p class="form-section-title">Basic details</p>
+            <div class="field-grid three">
+              <div class="field">
+                <label for="age">Age</label>
+                <div class="input-wrap">
+                  <input
+                    id="age"
+                    name="age"
+                    type="number"
+                    inputmode="numeric"
+                    min="18"
+                    max="100"
+                    step="1"
+                    placeholder="35"
+                    aria-describedby="age-error"
+                    required
+                  />
+                  <span class="input-unit">years</span>
+                </div>
+                <p id="age-error" class="field-error" aria-live="polite"></p>
+              </div>
+
+              <div class="field">
+                <label for="height">Height</label>
+                <div class="input-wrap">
+                  <input
+                    id="height"
+                    name="height"
+                    type="number"
+                    inputmode="decimal"
+                    min="120"
+                    max="230"
+                    step="0.1"
+                    placeholder="170"
+                    aria-describedby="height-error"
+                    required
+                  />
+                  <span class="input-unit" data-unit-for="length">cm</span>
+                </div>
+                <p id="height-error" class="field-error" aria-live="polite"></p>
+              </div>
+
+              <div class="field">
+                <label for="weight">Weight</label>
+                <div class="input-wrap">
+                  <input
+                    id="weight"
+                    name="weight"
+                    type="number"
+                    inputmode="decimal"
+                    min="30"
+                    max="300"
+                    step="0.1"
+                    placeholder="70"
+                    aria-describedby="weight-error"
+                    required
+                  />
+                  <span class="input-unit" data-unit-for="weight">kg</span>
+                </div>
+                <p id="weight-error" class="field-error" aria-live="polite"></p>
+              </div>
+            </div>
+          </div>
+
+          <div id="navy-fields" class="form-section" role="tabpanel" aria-labelledby="navy-tab">
+            <p class="form-section-title">Tape measurements</p>
+            <div class="field-grid three">
+              <div class="field">
+                <label for="neck">Neck</label>
+                <div class="input-wrap">
+                  <input
+                    id="neck"
+                    name="neck"
+                    type="number"
+                    inputmode="decimal"
+                    min="20"
+                    max="70"
+                    step="0.1"
+                    placeholder="34"
+                    aria-describedby="neck-error"
+                  />
+                  <span class="input-unit" data-unit-for="length">cm</span>
+                </div>
+                <p id="neck-error" class="field-error" aria-live="polite"></p>
+              </div>
+
+              <div class="field">
+                <label for="waist">Waist</label>
+                <div class="input-wrap">
+                  <input
+                    id="waist"
+                    name="waist"
+                    type="number"
+                    inputmode="decimal"
+                    min="40"
+                    max="200"
+                    step="0.1"
+                    placeholder="78"
+                    aria-describedby="waist-error"
+                  />
+                  <span class="input-unit" data-unit-for="length">cm</span>
+                </div>
+                <p id="waist-error" class="field-error" aria-live="polite"></p>
+              </div>
+
+              <div id="hip-field" class="field">
+                <label for="hip">Hip</label>
+                <div class="input-wrap">
+                  <input
+                    id="hip"
+                    name="hip"
+                    type="number"
+                    inputmode="decimal"
+                    min="50"
+                    max="220"
+                    step="0.1"
+                    placeholder="98"
+                    aria-describedby="hip-error"
+                  />
+                  <span class="input-unit" data-unit-for="length">cm</span>
+                </div>
+                <p id="hip-error" class="field-error" aria-live="polite"></p>
+              </div>
+            </div>
+          </div>
+
+          <div id="bmi-note" class="form-section callout" role="tabpanel" aria-labelledby="bmi-tab" hidden>
+            <strong>A quick estimate, not a direct measurement.</strong>
+            The height and weight method uses BMI, age, and formula sex. It is convenient
+            but cannot account for muscularity or individual fat distribution.
+          </div>
+
+          <button class="calculate-button" type="submit">
+            Calculate Body Fat Percentage
+          </button>
+          <p class="privacy-note">
+            <span aria-hidden="true">🔒</span>
+            Your measurements stay on this device. For adults aged 18–100.
+          </p>
+        </form>
+
+        <section
+          id="result"
+          class="result-card"
+          aria-live="polite"
+          aria-atomic="true"
+          tabindex="-1"
+          hidden
+        >
+          <div class="result-main">
+            <p class="result-kicker">Your estimated body fat</p>
+            <p id="result-percentage" class="result-value">—</p>
+            <span id="result-status" class="status-pill">Estimate ready</span>
+            <div class="gauge" aria-hidden="true">
+              <span id="gauge-marker" class="gauge-marker"></span>
+            </div>
+            <div class="gauge-labels" aria-hidden="true">
+              <span>Lower</span><span>Reference</span><span>Higher</span>
+            </div>
+          </div>
+          <div class="result-stats">
+            <div class="stat">
+              <span class="stat-label">Fat mass</span>
+              <strong id="result-fat-mass" class="stat-value">—</strong>
+            </div>
+            <div class="stat">
+              <span class="stat-label">Lean mass</span>
+              <strong id="result-lean-mass" class="stat-value">—</strong>
+            </div>
+            <div class="stat">
+              <span class="stat-label">Reference range</span>
+              <strong id="result-range" class="stat-value">—</strong>
+            </div>
+          </div>
+          <p id="result-explanation" class="result-explanation"></p>
+        </section>
+      </div>
+    </section>
+
+    <aside class="ad-slot" aria-label="Advertisement placeholder">Advertisement</aside>
+
+    <section id="how-it-works" class="content-section">
+      <div class="container reading-width">
+        <p class="section-kicker">The basics</p>
+        <h2>How to Calculate Body Fat Percentage</h2>
+        <p class="section-lead">
+          Body fat percentage is the share of your total body weight made up of fat.
+          Unlike BMI, it separates estimated fat mass from lean mass such as muscle,
+          bone, organs, and body water.
+        </p>
+        <div class="prose-grid">
+          <div class="info-card">
+            <h3>1. Choose a method</h3>
+            <p>
+              Use the US Navy method when you have a flexible tape measure. Choose the
+              height and weight estimate when you only know your basic measurements.
+            </p>
+          </div>
+          <div class="info-card">
+            <h3>2. Measure consistently</h3>
+            <p>
+              Stand relaxed, keep the tape level, and measure against the skin without
+              compressing it. Repeating each circumference two or three times can reduce
+              simple tape-placement errors.
+            </p>
+          </div>
+          <div class="info-card">
+            <h3>3. Read the estimate in context</h3>
+            <p>
+              A single number is less useful than a consistent trend. Compare repeat
+              measurements taken under similar conditions rather than chasing small
+              day-to-day changes.
+            </p>
+          </div>
+          <div class="info-card">
+            <h3>4. Remember the margin of error</h3>
+            <p>
+              Online formulas estimate body composition; they do not directly scan body
+              tissue. Hydration, tape tension, anatomy, and the selected equation all
+              affect the result.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="navy-method" class="content-section">
+      <div class="container reading-width">
+        <p class="section-kicker">Measurement method</p>
+        <h2>US Navy Body Fat Percentage Calculator Method</h2>
+        <p class="section-lead">
+          The Navy circumference method estimates body fat from height and a small set of
+          tape measurements. It usually reflects body shape better than a height-and-weight
+          formula, while remaining easy to use at home.
+        </p>
+
+        <div class="measurement-grid">
+          <article class="measurement-card">
+            <div class="measurement-visual" aria-hidden="true">
+              <svg viewBox="0 0 120 120" fill="none">
+                <circle cx="60" cy="28" r="15" stroke="#087f73" stroke-width="4" />
+                <path d="M45 48C49 43 71 43 75 48L82 103H38L45 48Z" stroke="#087f73" stroke-width="4" />
+                <path d="M43 47C52 53 68 53 77 47" stroke="#e47f57" stroke-width="5" stroke-linecap="round" />
+              </svg>
+            </div>
+            <h3>Neck</h3>
+            <p>
+              Measure just below the larynx, with the tape sloping slightly downward at
+              the front. Keep your shoulders relaxed and look straight ahead.
+            </p>
+          </article>
+
+          <article class="measurement-card">
+            <div class="measurement-visual" aria-hidden="true">
+              <svg viewBox="0 0 120 120" fill="none">
+                <circle cx="60" cy="22" r="12" stroke="#087f73" stroke-width="4" />
+                <path d="M43 39C49 35 71 35 77 39L88 104H32L43 39Z" stroke="#087f73" stroke-width="4" />
+                <path d="M36 70C49 75 71 75 84 70" stroke="#e47f57" stroke-width="5" stroke-linecap="round" />
+              </svg>
+            </div>
+            <h3>Waist</h3>
+            <p>
+              For the Navy equation, measure the abdominal circumference at the navel
+              after a normal exhale. Keep the tape horizontal and do not pull your stomach
+              inward.
+            </p>
+          </article>
+
+          <article class="measurement-card">
+            <div class="measurement-visual" aria-hidden="true">
+              <svg viewBox="0 0 120 120" fill="none">
+                <circle cx="60" cy="21" r="11" stroke="#087f73" stroke-width="4" />
+                <path d="M44 36C49 33 71 33 76 36L83 63L94 103H26L37 63L44 36Z" stroke="#087f73" stroke-width="4" />
+                <path d="M29 81C46 88 74 88 91 81" stroke="#e47f57" stroke-width="5" stroke-linecap="round" />
+              </svg>
+            </div>
+            <h3>Hip</h3>
+            <p>
+              The female Navy formula also uses hip circumference. Measure around the
+              widest part of the buttocks while keeping the tape parallel to the floor.
+            </p>
+          </article>
+        </div>
+
+        <div class="formula-box">
+          <strong>How the equation works:</strong>
+          the method uses logarithmic relationships between circumference differences
+          and height. The calculator converts metric values internally so metric and US
+          unit inputs produce equivalent estimates.
+        </div>
+      </div>
+    </section>
+
+    <section id="height-weight" class="content-section">
+      <div class="container reading-width">
+        <p class="section-kicker">Quick method</p>
+        <h2>Height and Weight Estimate for Body Fat Percentage</h2>
+        <p class="section-lead">
+          If you do not have a tape measure, the height and weight option first calculates
+          BMI and then applies an adult research equation using age and formula sex.
+        </p>
+        <div class="formula-box">
+          <code>Estimated body fat % = 1.20 × BMI + 0.23 × age − 10.8 × sex − 5.4</code>
+          <p>
+            In the published formula, sex is coded as 1 for the male equation and 0 for
+            the female equation. This calculator labels that choice clearly because it is
+            a mathematical input, not a statement about gender identity.
+          </p>
+        </div>
+        <h3>When is the height and weight estimate useful?</h3>
+        <p>
+          It is useful for a fast baseline, population-level comparisons, or situations
+          where circumference measurements are unavailable. It can be misleading for
+          highly muscular people, older adults with low muscle mass, pregnant people, and
+          anyone whose body composition differs substantially from the population used to
+          develop the equation.
+        </p>
+      </div>
+    </section>
+
+    <section id="body-fat-chart" class="content-section">
+      <div class="container reading-width">
+        <p class="section-kicker">Reference ranges</p>
+        <h2>Body Fat Percentage Chart by Age and Sex</h2>
+        <p class="section-lead">
+          The ranges below are commonly cited healthy reference intervals derived from
+          research connecting BMI guidelines with measured body fat. They are context,
+          not a diagnosis or a universal target.
+        </p>
+        <div class="range-table-wrap">
+          <table class="range-table">
+            <thead>
+              <tr>
+                <th scope="col">Age</th>
+                <th scope="col">Male formula range</th>
+                <th scope="col">Female formula range</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>20–39</td>
+                <td>8–19%</td>
+                <td>21–32%</td>
+              </tr>
+              <tr>
+                <td>40–59</td>
+                <td>11–21%</td>
+                <td>23–33%</td>
+              </tr>
+              <tr>
+                <td>60–79</td>
+                <td>13–24%</td>
+                <td>24–35%</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="callout">
+          For ages 18–19 and 80–100, the calculator still provides an estimate but does
+          not assign one of these research-based reference ranges.
+        </div>
+      </div>
+    </section>
+
+    <section id="ideal-body-fat" class="content-section">
+      <div class="container reading-width">
+        <p class="section-kicker">Interpreting results</p>
+        <h2>What Is an Ideal Body Fat Percentage?</h2>
+        <p class="section-lead">
+          There is no single ideal body fat percentage for every person. Age, biological
+          characteristics, health history, sport, muscle mass, and the measurement method
+          all change what a useful target looks like.
+        </p>
+        <div class="card-grid two">
+          <article class="info-card">
+            <h3>Use a range, not a magic number</h3>
+            <p>
+              Reference ranges are more honest than one exact target. A result near a
+              boundary can also move between categories because online methods have
+              measurement error.
+            </p>
+          </article>
+          <article class="info-card">
+            <h3>Track changes consistently</h3>
+            <p>
+              If your goal is to monitor progress, use the same method, tape placement,
+              time of day, and general hydration conditions each time.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="accuracy" class="content-section">
+      <div class="container reading-width">
+        <p class="section-kicker">Accuracy and limits</p>
+        <h2>How Accurate Is This Calculator?</h2>
+        <p class="section-lead">
+          No online body fat percentage calculator is exact. The Navy method is generally
+          more personalized than a BMI-based estimate, but both remain indirect methods.
+        </p>
+        <div class="card-grid two">
+          <article class="info-card">
+            <h3>What can change the result?</h3>
+            <p>
+              Tape placement, posture, breathing, clothing, hydration, recent meals, and
+              rounding can all shift an estimate. The height-and-weight equation is also
+              sensitive to unusually high or low muscle mass.
+            </p>
+          </article>
+          <article class="info-card">
+            <h3>What is more accurate?</h3>
+            <p>
+              Clinical and laboratory options include DEXA, air displacement
+              plethysmography, and professionally administered skinfold or bioimpedance
+              assessments. Each has its own assumptions, costs, and sources of error.
+            </p>
+          </article>
+        </div>
+        <div class="callout">
+          Use this result as an estimate and trend-tracking tool. Consult a qualified
+          healthcare professional when body composition is relevant to a medical concern,
+          eating disorder, pregnancy, or treatment plan.
+        </div>
+      </div>
+    </section>
+
+    <section id="men-women" class="content-section">
+      <div class="container reading-width">
+        <p class="section-kicker">Formula differences</p>
+        <h2>Body Fat Percentage for Men and Women</h2>
+        <p class="section-lead">
+          The equations use different circumference combinations because average fat
+          distribution differs between the populations used to develop them.
+        </p>
+        <p>
+          The male Navy equation uses neck and waist measurements. The female Navy
+          equation adds hip circumference. Reference ranges are also different because
+          essential fat and typical body-fat distributions differ. These are limitations
+          of the equations themselves; they do not capture every body, hormone profile,
+          transition, or medical circumstance.
+        </p>
+      </div>
+    </section>
+
+    <aside class="ad-slot" aria-label="Advertisement placeholder">Advertisement</aside>
+
+    <section id="faq" class="content-section">
+      <div class="container reading-width">
+        <p class="section-kicker">Common questions</p>
+        <h2>Frequently Asked Questions</h2>
+        <div class="faq-list">
+          <details>
+            <summary>Can I calculate body fat percentage at home?</summary>
+            <p>
+              Yes. A flexible tape measure and the US Navy method offer a practical home
+              estimate. Measure carefully and repeat the process under similar conditions.
+            </p>
+          </details>
+          <details>
+            <summary>Can height and weight alone calculate body fat?</summary>
+            <p>
+              They can produce a rough estimate through a BMI-based research equation, but
+              height and weight cannot distinguish muscle from fat. Circumference or
+              clinical measurements provide more body-specific information.
+            </p>
+          </details>
+          <details>
+            <summary>Is the Navy body fat method accurate?</summary>
+            <p>
+              It is useful for screening and repeat tracking, but it is still an estimate.
+              Tape placement and differences in body shape can create several percentage
+              points of variation.
+            </p>
+          </details>
+          <details>
+            <summary>Why does the female formula need a hip measurement?</summary>
+            <p>
+              The female Navy equation was developed using neck, waist, hip, and height.
+              Omitting the hip measurement would mean using a different, unsupported
+              equation.
+            </p>
+          </details>
+          <details>
+            <summary>Is body fat percentage better than BMI?</summary>
+            <p>
+              They answer different questions. BMI describes weight relative to height,
+              while body fat percentage estimates how much weight is fat mass. Neither
+              number alone describes overall health.
+            </p>
+          </details>
+          <details>
+            <summary>How often should I measure body fat?</summary>
+            <p>
+              For trend tracking, every two to four weeks is usually more informative than
+              daily measurement. Short-term changes can reflect measurement noise rather
+              than a true change in body fat.
+            </p>
+          </details>
+          <details>
+            <summary>Does the calculator store my measurements?</summary>
+            <p>
+              No. Calculation happens locally in your browser. This page does not require
+              an account, upload your measurements, or save them in cookies.
+            </p>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <section id="sources" class="content-section">
+      <div class="container reading-width">
+        <p class="section-kicker">Methodology</p>
+        <h2>Sources and Medical Disclaimer</h2>
+        <p>
+          The height-and-weight estimate follows the adult Deurenberg BMI equation. The
+          age- and sex-based context uses ranges reported by Gallagher and colleagues. The
+          circumference calculation uses the commonly published US Navy equations.
+        </p>
+        <ul class="source-list">
+          <li>
+            Deurenberg P, Weststrate JA, Seidell JC. “Body mass index as a measure of
+            body fatness: age- and sex-specific prediction formulas.”
+            <a href="https://pubmed.ncbi.nlm.nih.gov/2043597/" rel="external">PubMed</a>.
+          </li>
+          <li>
+            Gallagher D, et al. “Healthy percentage body fat ranges: an approach for
+            developing guidelines based on body mass index.”
+            <a href="https://pubmed.ncbi.nlm.nih.gov/10966886/" rel="external">PubMed</a>.
+          </li>
+        </ul>
+        <div class="callout">
+          This website provides educational estimates only. It does not diagnose a health
+          condition, replace medical testing, or provide treatment or personalized weight
+          loss advice.
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    import {
+      calculateBodyFat,
+      convertMeasurementValue,
+      validateCalculatorInput,
+    } from "@/lib/body-fat";
+    import type {
+      CalculatorInput,
+      CalculatorMethod,
+      FormulaSex,
+      UnitSystem,
+    } from "@/lib/types";
+
+    const form = document.querySelector<HTMLFormElement>("#body-fat-form");
+    const result = document.querySelector<HTMLElement>("#result");
+
+    if (!form || !result) {
+      throw new Error("Calculator markup is incomplete.");
+    }
+
+    const methodInput = form.querySelector<HTMLInputElement>("#method")!;
+    const methodTabs = Array.from(
+      form.querySelectorAll<HTMLButtonElement>("[data-method]"),
+    );
+    const navyFields = form.querySelector<HTMLElement>("#navy-fields")!;
+    const bmiNote = form.querySelector<HTMLElement>("#bmi-note")!;
+    const methodNote = form.querySelector<HTMLElement>("#method-note")!;
+    const hipField = form.querySelector<HTMLElement>("#hip-field")!;
+    const numericFields = Array.from(
+      form.querySelectorAll<HTMLInputElement>('input[type="number"]'),
+    );
+    const measurementFields = ["height", "neck", "waist", "hip"] as const;
+    let currentUnits: UnitSystem = "metric";
+
+    const getInput = (id: string) =>
+      form.querySelector<HTMLInputElement>(`#${id}`)!;
+
+    const parseField = (id: string): number => {
+      const value = getInput(id).valueAsNumber;
+      return Number.isFinite(value) ? value : Number.NaN;
+    };
+
+    const selectedValue = <T extends string>(name: string): T =>
+      form.querySelector<HTMLInputElement>(`input[name="${name}"]:checked`)!
+        .value as T;
+
+    const setMethod = (method: CalculatorMethod) => {
+      methodInput.value = method;
+      methodTabs.forEach((tab) => {
+        tab.setAttribute(
+          "aria-selected",
+          String(tab.dataset.method === method),
+        );
+      });
+      const usingNavy = method === "navy";
+      navyFields.hidden = !usingNavy;
+      bmiNote.hidden = usingNavy;
+      methodNote.textContent = usingNavy
+        ? "Uses body circumferences for a more individual estimate."
+        : "Uses BMI, age, and formula sex for a quick, less precise estimate.";
+      result.hidden = true;
+    };
+
+    methodTabs.forEach((tab) => {
+      tab.addEventListener("click", () => {
+        setMethod(tab.dataset.method as CalculatorMethod);
+      });
+      tab.addEventListener("keydown", (event) => {
+        if (event.key !== "ArrowLeft" && event.key !== "ArrowRight") return;
+        event.preventDefault();
+        const currentIndex = methodTabs.indexOf(tab);
+        const direction = event.key === "ArrowRight" ? 1 : -1;
+        const nextIndex =
+          (currentIndex + direction + methodTabs.length) % methodTabs.length;
+        const nextTab = methodTabs[nextIndex];
+        if (!nextTab) return;
+        setMethod(nextTab.dataset.method as CalculatorMethod);
+        nextTab.focus();
+      });
+    });
+
+    form.querySelectorAll<HTMLInputElement>('input[name="formulaSex"]').forEach(
+      (radio) => {
+        radio.addEventListener("change", () => {
+          hipField.hidden = selectedValue<FormulaSex>("formulaSex") === "male";
+          result.hidden = true;
+        });
+      },
+    );
+
+    const unitSettings = {
+      metric: {
+        length: "cm",
+        weight: "kg",
+        height: { min: 120, max: 230, placeholder: "170" },
+        neck: { min: 20, max: 70, placeholder: "34" },
+        waist: { min: 40, max: 200, placeholder: "78" },
+        hip: { min: 50, max: 220, placeholder: "98" },
+        bodyWeight: { min: 30, max: 300, placeholder: "70" },
+      },
+      imperial: {
+        length: "in",
+        weight: "lb",
+        height: { min: 47, max: 91, placeholder: "67" },
+        neck: { min: 8, max: 28, placeholder: "13.5" },
+        waist: { min: 16, max: 79, placeholder: "31" },
+        hip: { min: 20, max: 87, placeholder: "39" },
+        bodyWeight: { min: 66, max: 661, placeholder: "154" },
+      },
+    } as const;
+
+    const applyUnitSettings = (units: UnitSystem) => {
+      const settings = unitSettings[units];
+      form.querySelectorAll<HTMLElement>('[data-unit-for="length"]').forEach(
+        (label) => (label.textContent = settings.length),
+      );
+      form.querySelectorAll<HTMLElement>('[data-unit-for="weight"]').forEach(
+        (label) => (label.textContent = settings.weight),
+      );
+
+      for (const id of measurementFields) {
+        const input = getInput(id);
+        const setting = settings[id];
+        input.min = String(setting.min);
+        input.max = String(setting.max);
+        input.placeholder = setting.placeholder;
+      }
+
+      const weight = getInput("weight");
+      weight.min = String(settings.bodyWeight.min);
+      weight.max = String(settings.bodyWeight.max);
+      weight.placeholder = settings.bodyWeight.placeholder;
+    };
+
+    form.querySelectorAll<HTMLInputElement>('input[name="units"]').forEach(
+      (radio) => {
+        radio.addEventListener("change", () => {
+          const nextUnits = selectedValue<UnitSystem>("units");
+          for (const id of measurementFields) {
+            const input = getInput(id);
+            if (input.value !== "") {
+              input.value = convertMeasurementValue(
+                input.valueAsNumber,
+                currentUnits,
+                nextUnits,
+                "length",
+              ).toFixed(1);
+            }
+          }
+
+          const weight = getInput("weight");
+          if (weight.value !== "") {
+            weight.value = convertMeasurementValue(
+              weight.valueAsNumber,
+              currentUnits,
+              nextUnits,
+              "weight",
+            ).toFixed(1);
+          }
+
+          currentUnits = nextUnits;
+          applyUnitSettings(nextUnits);
+          result.hidden = true;
+        });
+      },
+    );
+
+    const clearErrors = () => {
+      numericFields.forEach((input) => {
+        input.removeAttribute("aria-invalid");
+        const error = form.querySelector<HTMLElement>(`#${input.id}-error`);
+        if (error) error.textContent = "";
+      });
+    };
+
+    const buildInput = (): CalculatorInput => {
+      const method = methodInput.value as CalculatorMethod;
+      const formulaSex = selectedValue<FormulaSex>("formulaSex");
+      const input: CalculatorInput = {
+        method,
+        units: selectedValue<UnitSystem>("units"),
+        formulaSex,
+        age: parseField("age"),
+        height: parseField("height"),
+        weight: parseField("weight"),
+      };
+
+      if (method === "navy") {
+        input.neck = parseField("neck");
+        input.waist = parseField("waist");
+        if (formulaSex === "female") input.hip = parseField("hip");
+      }
+
+      return input;
+    };
+
+    const showErrors = (input: CalculatorInput) => {
+      const validation = validateCalculatorInput(input);
+      const errorEntries = Object.entries(validation.errors);
+
+      for (const [field, message] of errorEntries) {
+        const inputElement = getInput(field);
+        const error = form.querySelector<HTMLElement>(`#${field}-error`);
+        inputElement.setAttribute("aria-invalid", "true");
+        if (error) error.textContent = message ?? "";
+      }
+
+      if (errorEntries[0]) {
+        getInput(errorEntries[0][0]).focus();
+      }
+
+      return validation.valid;
+    };
+
+    form.addEventListener("submit", (event) => {
+      event.preventDefault();
+      clearErrors();
+      const input = buildInput();
+      if (!showErrors(input)) {
+        result.hidden = true;
+        return;
+      }
+
+      const calculation = calculateBodyFat(input);
+      const massUnit = input.units === "metric" ? "kg" : "lb";
+      const methodLabel =
+        input.method === "navy" ? "US Navy circumference method" : "height and weight estimate";
+
+      result.querySelector<HTMLElement>("#result-percentage")!.textContent =
+        `${calculation.bodyFatPercentage.toFixed(1)}%`;
+      result.querySelector<HTMLElement>("#result-fat-mass")!.textContent =
+        `${calculation.fatMass.toFixed(1)} ${massUnit}`;
+      result.querySelector<HTMLElement>("#result-lean-mass")!.textContent =
+        `${calculation.leanMass.toFixed(1)} ${massUnit}`;
+
+      const status = result.querySelector<HTMLElement>("#result-status")!;
+      const range = result.querySelector<HTMLElement>("#result-range")!;
+      if (calculation.referenceRange && calculation.referenceStatus) {
+        const statusLabels = {
+          below: "Below reference range",
+          within: "Within reference range",
+          above: "Above reference range",
+        };
+        status.textContent = statusLabels[calculation.referenceStatus];
+        range.textContent =
+          `${calculation.referenceRange.minimum}–${calculation.referenceRange.maximum}%`;
+      } else {
+        status.textContent = "Estimate only";
+        range.textContent = "Not assigned";
+      }
+
+      const marker = result.querySelector<HTMLElement>("#gauge-marker")!;
+      marker.style.left =
+        `${Math.min(96, Math.max(4, calculation.bodyFatPercentage * 2))}%`;
+
+      const explanation =
+        calculation.referenceRange === null
+          ? `${methodLabel}. No age-based reference range is shown outside ages 20–79. This is an estimate, not a medical diagnosis.`
+          : `${methodLabel}. Reference range shown for the ${calculation.referenceRange.ageBand} age group using the ${input.formulaSex} research category. This is an estimate, not a medical diagnosis.`;
+      result.querySelector<HTMLElement>("#result-explanation")!.textContent =
+        explanation;
+
+      result.hidden = false;
+      result.focus({ preventScroll: true });
+      result.scrollIntoView({ behavior: "smooth", block: "nearest" });
+    });
+
+    hipField.hidden = selectedValue<FormulaSex>("formulaSex") === "male";
+    applyUnitSettings("metric");
+  </script>
+</BaseLayout>

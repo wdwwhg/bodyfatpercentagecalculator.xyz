@@ -1,0 +1,95 @@
+---
+import "@/styles/global.css";
+
+const title = "Body Fat Percentage Calculator – Navy & BMI Estimate";
+const description =
+  "Free body fat percentage calculator using Navy measurements or height and weight. See your estimated range, fat mass and lean mass instantly.";
+const canonical = new URL(Astro.url.pathname, Astro.site);
+const ogImage = new URL("/og-image.svg", Astro.site);
+
+const structuredData = [
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    name: "Body Fat Percentage Calculator",
+    url: Astro.site,
+    description,
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    name: "Body Fat Percentage Calculator",
+    applicationCategory: "HealthApplication",
+    operatingSystem: "Any",
+    url: canonical,
+    description,
+    offers: {
+      "@type": "Offer",
+      price: "0",
+      priceCurrency: "USD",
+    },
+    featureList: [
+      "US Navy circumference method",
+      "Height and weight body fat estimate",
+      "Metric and imperial units",
+      "Age- and sex-based reference ranges",
+      "Fat mass and lean mass results",
+    ],
+  },
+];
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#087f73" />
+    <meta name="robots" content="index, follow, max-image-preview:large" />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="manifest" href="/site.webmanifest" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:site_name" content="Body Fat Percentage Calculator" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+
+    <title>{title}</title>
+    <script is:inline type="application/ld+json" set:html={JSON.stringify(structuredData)} />
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">Skip to calculator</a>
+    <header class="site-header">
+      <div class="container header-inner">
+        <a class="brand" href="/">
+          <span class="brand-mark" aria-hidden="true">BF%</span>
+          <span class="brand-text">Body Fat Calculator</span>
+        </a>
+        <nav class="site-nav" aria-label="Primary navigation">
+          <a href="#how-it-works">How it works</a>
+          <a href="#body-fat-chart">Body fat chart</a>
+          <a href="#accuracy">Accuracy</a>
+          <a href="#faq">FAQ</a>
+        </nav>
+      </div>
+    </header>
+
+    <slot />
+
+    <footer class="site-footer">
+      <div class="container footer-inner">
+        <strong>Body Fat Percentage Calculator</strong>
+        <span>Free, private, and designed for adults. Your measurements never leave your browser.</span>
+        <span>© {new Date().getFullYear()} bodyfatpercentagecalculator.xyz</span>
+      </div>
+    </footer>
+  </body>
+</html>

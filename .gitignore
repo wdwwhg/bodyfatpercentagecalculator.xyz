@@ -1,0 +1,9 @@
+node_modules/
+dist/
+.astro/
+.agents/
+.pnpm-store/
+.superpowers/
+coverage/
+playwright-report/
+test-results/
