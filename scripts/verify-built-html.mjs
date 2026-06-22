@@ -18,6 +18,8 @@ const requiredSnippets = [
   "Frequently Asked Questions",
   '"@type":"SoftwareApplication"',
   '"@type":"WebSite"',
+  "https://www.googletagmanager.com/gtag/js?id=G-4TGXQJXZYS",
+  "gtag('config', 'G-4TGXQJXZYS')",
 ];
 
 for (const snippet of requiredSnippets) {
