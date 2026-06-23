@@ -2,6 +2,10 @@ import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 
 const html = await readFile(new URL("../dist/index.html", import.meta.url), "utf8");
+const notFoundHtml = await readFile(
+  new URL("../dist/404.html", import.meta.url),
+  "utf8",
+);
 
 const requiredSnippets = [
   "<title>Body Fat Percentage Calculator – Navy &amp; BMI Estimate</title>",
@@ -32,3 +36,15 @@ assert.ok(
 );
 
 console.log("Built HTML contains the required static SEO content and metadata.");
+
+for (const snippet of [
+  "<title>Page Not Found | Body Fat Percentage Calculator</title>",
+  'name="robots" content="noindex, follow"',
+  'href="/"',
+  "404",
+  "Page not found",
+]) {
+  assert.ok(notFoundHtml.includes(snippet), `Built 404 page is missing: ${snippet}`);
+}
+
+console.log("Built output contains a dedicated noindex 404.html page.");

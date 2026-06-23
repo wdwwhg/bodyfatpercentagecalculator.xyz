@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex, follow" />
+    <meta name="theme-color" content="#087f73" />
+    <title>Page Not Found | Body Fat Percentage Calculator</title>
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+
+    <!-- Google tag (gtag.js) -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-4TGXQJXZYS"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-4TGXQJXZYS');
+    </script>
+
+    <style>
+      :root {
+        color-scheme: light;
+        font-family:
+          Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+          "Segoe UI", sans-serif;
+        color: #102a2a;
+        background: #f4f8f7;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        min-height: 100vh;
+        margin: 0;
+        background:
+          radial-gradient(
+            circle at 50% 0%,
+            rgba(8, 127, 115, 0.1),
+            transparent 30rem
+          ),
+          #f4f8f7;
+      }
+
+      header {
+        border-bottom: 1px solid #d8e6e4;
+        background: rgba(244, 248, 247, 0.9);
+      }
+
+      .header-inner,
+      main {
+        width: min(100% - 2rem, 72rem);
+        margin-inline: auto;
+      }
+
+      .header-inner {
+        display: flex;
+        min-height: 4rem;
+        align-items: center;
+      }
+
+      .brand {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.65rem;
+        color: inherit;
+        font-weight: 850;
+        letter-spacing: -0.02em;
+        text-decoration: none;
+      }
+
+      .brand-mark {
+        display: grid;
+        width: 2rem;
+        height: 2rem;
+        place-items: center;
+        border-radius: 0.65rem;
+        background: #087f73;
+        color: white;
+        font-size: 0.82rem;
+      }
+
+      main {
+        display: grid;
+        min-height: calc(100vh - 4rem);
+        place-items: center;
+        padding-block: 3rem;
+      }
+
+      .card {
+        width: min(100%, 42rem);
+        border: 1px solid #d8e6e4;
+        border-radius: 1.35rem;
+        background: white;
+        padding: clamp(2rem, 7vw, 4.5rem);
+        box-shadow: 0 24px 65px rgba(17, 75, 70, 0.09);
+        text-align: center;
+      }
+
+      .code {
+        margin: 0;
+        color: #087f73;
+        font-size: clamp(4.5rem, 20vw, 8rem);
+        font-weight: 900;
+        letter-spacing: -0.08em;
+        line-height: 0.9;
+      }
+
+      h1 {
+        margin: 1.25rem 0 0;
+        font-size: clamp(2rem, 7vw, 3rem);
+        letter-spacing: -0.04em;
+        line-height: 1.1;
+      }
+
+      p {
+        max-width: 34rem;
+        margin: 1rem auto 0;
+        color: #526c69;
+        line-height: 1.7;
+      }
+
+      .home-link {
+        display: inline-flex;
+        min-height: 3.1rem;
+        align-items: center;
+        justify-content: center;
+        margin-top: 1.75rem;
+        border-radius: 0.8rem;
+        background: #087f73;
+        padding: 0.7rem 1.25rem;
+        color: white;
+        font-weight: 800;
+        text-decoration: none;
+      }
+
+      .home-link:hover {
+        background: #075f57;
+      }
+
+      :focus-visible {
+        outline: 3px solid rgba(8, 127, 115, 0.3);
+        outline-offset: 3px;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="header-inner">
+        <a class="brand" href="/">
+          <span class="brand-mark" aria-hidden="true">BF%</span>
+          <span>Body Fat Calculator</span>
+        </a>
+      </div>
+    </header>
+
+    <main>
+      <section class="card" aria-labelledby="not-found-title">
+        <p class="code" aria-hidden="true">404</p>
+        <h1 id="not-found-title">Page not found</h1>
+        <p>
+          The page you requested may have moved, been removed, or never existed.
+          Return to the calculator to estimate your body fat percentage.
+        </p>
+        <a class="home-link" href="/">Return to the calculator</a>
+      </section>
+    </main>
+  </body>
+</html>
