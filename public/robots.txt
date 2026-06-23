@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://bodyfatpercentagecalculator.xyz/sitemap-index.xml
+Sitemap: https://bodyfatpercentagecalculator.xyz/sitemap.xml

@@ -6,6 +6,14 @@ const notFoundHtml = await readFile(
   new URL("../dist/404.html", import.meta.url),
   "utf8",
 );
+const sitemapXml = await readFile(
+  new URL("../dist/sitemap.xml", import.meta.url),
+  "utf8",
+);
+const robotsTxt = await readFile(
+  new URL("../dist/robots.txt", import.meta.url),
+  "utf8",
+);
 
 const requiredSnippets = [
   "<title>Body Fat Percentage Calculator – Navy &amp; BMI Estimate</title>",
@@ -48,3 +56,20 @@ for (const snippet of [
 }
 
 console.log("Built output contains a dedicated noindex 404.html page.");
+
+assert.ok(
+  sitemapXml.includes("<sitemapindex") || sitemapXml.includes("<urlset"),
+  "Built sitemap.xml must contain a valid sitemap index or URL set.",
+);
+assert.ok(
+  sitemapXml.includes("https://bodyfatpercentagecalculator.xyz/"),
+  "Built sitemap.xml must reference the production site.",
+);
+assert.ok(
+  robotsTxt.includes(
+    "Sitemap: https://bodyfatpercentagecalculator.xyz/sitemap.xml",
+  ),
+  "robots.txt must advertise the standard sitemap.xml URL.",
+);
+
+console.log("Built output contains a standard sitemap.xml advertised by robots.txt.");
