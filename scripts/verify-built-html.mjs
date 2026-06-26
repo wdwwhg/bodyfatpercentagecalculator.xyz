@@ -32,6 +32,8 @@ const requiredSnippets = [
   '"@type":"WebSite"',
   "https://www.googletagmanager.com/gtag/js?id=G-4TGXQJXZYS",
   "gtag('config', 'G-4TGXQJXZYS')",
+  'https://analytics.ahrefs.com/analytics.js',
+  'data-key="gyqJ6AsI+bu2K8B9OPk1OQ"',
 ];
 
 for (const snippet of requiredSnippets) {
